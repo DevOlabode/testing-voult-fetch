@@ -75,15 +75,17 @@ app.post('/login', async(req, res) =>{
 });
 
 app.get('/profile', async(req, res)=>{
+  console.log(`Bearer ${process.env.REFRESH_TOKEN}`);
   try {
     const response = await axios.post(
       'https://voult.dev/api/user/me',
       {
         headers: {
           'Content-Type': 'application/json',
+          'x-client-token': `Bearer ${process.env.ACCESS_TOKEN}`,
+          'x-client-refresh-token' : `Bearer ${process.env.REFRESH_TOKEN}`,
           'x-client-id': `${process.env.CLIENT_ID}`,
           'x-client-secret': `${process.env.CLIENT_SECRET}`,
-          'x-client-token': `Bearer ${process.env.ACCESS_TOKEN}`
         }
     }
     );
