@@ -1,6 +1,7 @@
+require('dotenv').config();
+
 const express = require('express');
 const axios = require('axios');
-require('dotenv').config(); // Load environment variables
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,19 +13,20 @@ app.get('/', (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
+  console.log(process.env.CLIENT_ID);
+  console.log(process.env.CLIENT_SECRET);
+
+  const {email, fullName, password} = req.body;
+
   try {
     const response = await axios.post(
       'https://voult.dev/api/register',
+      req.body,
       {
-        fullName: "Samuel Olabode",
-        email: "solabode499@gmail.com",
-        password: "Sammy**34J123%"
-      },
-      {
-        headers: {
+      headers: {
           'Content-Type': 'application/json',
-          'x-client-id': process.env.CLIENT_ID,
-          'x-client-secret': process.env.CLIENT_SECRET
+          'x-client-id': `Bearer ${process.env.CLIENT_ID}`,
+          'x-client-secret': `Bearer ${process.env.CLIENT_SECRET}`
         }
       }
     );
