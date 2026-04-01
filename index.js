@@ -13,6 +13,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
+  console.log(process.env.CLIENT_ID);
+  console.log(process.env.CLIENT_SECRET);
   try {
     const response = await axios.post(
       'https://voult.dev/api/auth/register',
@@ -20,8 +22,8 @@ app.post('/register', async (req, res) => {
       {
       headers: {
           'Content-Type': 'application/json',
-          'x-client-id': `Bearer ${process.env.CLIENT_ID}`,
-          'x-client-secret': `Bearer ${process.env.CLIENT_SECRET}`
+          'x-client-id': `${process.env.CLIENT_ID}`,
+          'x-client-secret': `${process.env.CLIENT_SECRET}`
         }
       }
     );
