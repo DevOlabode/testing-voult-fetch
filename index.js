@@ -63,7 +63,7 @@ app.post('/login', async(req, res) =>{
       success: true,
       data: response.data
     });
-    
+
   }catch(error) {
     console.error(error.message);
 
@@ -72,7 +72,38 @@ app.post('/login', async(req, res) =>{
       message: error.response?.data || "Something went wrong"
     });
   }
-})
+});
+
+app.get('/profile', async(req, res)=>{
+  try {
+    const response = await axios.post(
+      'https://voult.dev/api/user/me',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-client-id': `${process.env.CLIENT_ID}`,
+          'x-client-secret': `${process.env.CLIENT_SECRET}`,
+          'x-client-token': `Bearer ${process.env.ACCESS_TOKEN}`
+        }
+    }
+    );
+
+    console.log(response.data);
+
+    res.json({
+      success: true,
+      data: response.data
+    });
+
+  }catch(error){
+    console.error(error.message);
+
+    res.status(error.response?.status || 500).json({
+      success: false,
+      message: error.response?.data || "Something went wrong"
+    });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
