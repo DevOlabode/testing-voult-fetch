@@ -60,10 +60,14 @@ app.post('/register', async(req, res) =>{
       }
     );
 
-    console.log(response);
+    console.log(response.data);
+    res.json({
+      success : true,
+      data : response.data
+    });
 
   }catch (err){
-    console.error(err);
+    console.error(err.message);
     res.json({"error message: " : err.message});
   }
 });
