@@ -74,21 +74,49 @@ app.post('/login', async(req, res) =>{
   }
 });
 
+// app.get('/profile', async(req, res)=>{
+
+//   try {
+//     const response = await axios.post(
+//       'https://voult.dev/api/user/me',
+//       {
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'X-Client-Token': `Bearer ${process.env.ACCESS_TOKEN}`,
+//           'x-client-id': `${process.env.CLIENT_ID}`,
+//           'x-client-secret': `${process.env.CLIENT_SECRET}`,
+//         }
+//     }
+//     );
+
+//     console.log(response.data);
+
+//     res.json({
+//       success: true,
+//       data: response.data
+//     });
+
+//   }catch(error){
+//     console.error(error.message);
+
+//     res.status(error.response?.status || 500).json({
+//       success: false,
+//       message: error.response?.data || "Something went wrong"
+//     });
+//   }
+// });
+
 app.get('/profile', async(req, res)=>{
-  console.log(`Bearer ${process.env.REFRESH_TOKEN}`);
   try {
-    const response = await axios.post(
+    const response = await axios.get(
       'https://voult.dev/api/user/me',
       {
         headers: {
-          'Content-Type': 'application/json',
-          'x-client-token': `Bearer ${process.env.ACCESS_TOKEN}`,
-          'x-client-id': `${process.env.CLIENT_ID}`,
-          'x-client-secret': `${process.env.CLIENT_SECRET}`,
+          'X-Client-Token': `Bearer ${process.env.ACCESS_TOKEN}`
         }
-    }
+      }
     );
-
+    
     console.log(response.data);
 
     res.json({
@@ -96,7 +124,7 @@ app.get('/profile', async(req, res)=>{
       data: response.data
     });
 
-  }catch(error){
+  } catch(error){
     console.error(error.message);
 
     res.status(error.response?.status || 500).json({
@@ -105,6 +133,7 @@ app.get('/profile', async(req, res)=>{
     });
   }
 });
+
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
