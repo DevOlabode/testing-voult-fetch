@@ -32,6 +32,7 @@ module.exports.register = async (req, res) => {
   };
 
   module.exports.login = async(req, res) =>{
+    console.log(req.body);
     try {
       const response = await axios.post(
         'https://voult.dev/api/auth/login',

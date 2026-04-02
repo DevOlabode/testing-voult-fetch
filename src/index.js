@@ -8,9 +8,9 @@ const port = process.env.PORT || 3000;
 
 const manualAuthRoutes = require('../routes/manualAuth');
 
-app.use('/', manualAuthRoutes);
-
 app.use(express.json());
+
+app.use('/', manualAuthRoutes);
 
 app.get('/', (req, res) => {
   res.json('Hello World!');
