@@ -67,45 +67,9 @@ module.exports.register = async (req, res) => {
       });
     }
   };
-  
-
-// module.exports.logout = async(req, res)=>{
-//     try {
-//       const accessToken = await tokenManager.getValidAccessToken();
-//       const response = await axios.post(
-//         `${process.env.API_URL}/auth/logout`,
-//         {},
-//         {
-//           headers: {
-//             'Content-Type': 'application/json',
-//             'x-client-id': `${process.env.CLIENT_ID}`,
-//             'x-client-secret': `${process.env.CLIENT_SECRET}`,
-//             'X-Client-Token': `Bearer ${accessToken}`
-//           }
-//         }
-//       );
-  
-//       console.log(response.data);
-  
-//       res.json({
-//         success: true,
-//         data: response.data
-//       });
-  
-//     } catch(error){
-//       console.error(error.response.data);
-  
-//       res.status(error.response?.status || 500).json({
-//         success: false,
-//         message: error.response?.data || "Something went wrong"
-//       });
-//     }
-//   };
 
 module.exports.logout = async(req, res)=>{
   try {
-    // Use getCurrentToken() instead of getValidAccessToken() for logout
-    // This prevents auto-refreshing the token when logging out
     const currentToken = tokenManager.getCurrentToken();
     
     if (!currentToken) {
