@@ -69,7 +69,7 @@ module.exports.logout = async(req, res)=>{
     try {
       const accessToken = await tokenManager.getValidAccessToken();
       const response = await axios.post(
-        'https://voult.dev/api/auth/logout',
+        `${process.env.API_URL}/auth/logout`,
         {},
         {
           headers: {
