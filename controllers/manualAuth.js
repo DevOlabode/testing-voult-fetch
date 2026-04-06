@@ -34,7 +34,6 @@ module.exports.register = async (req, res) => {
   };
 
   module.exports.login = async(req, res) =>{
-    console.log(req.body);
     try {
       const response = await axios.post(
         `${process.env.API_URL}/auth/login`,
@@ -48,22 +47,27 @@ module.exports.register = async (req, res) => {
         }
       );
   
-      console.log(response.data);
+      // ✅ CRITICAL: Store tokens in TokenManager after login
+      tokenManager.setTokens(
+        response.data.accessToken,
+        response.data.refreshToken
+      );
   
       res.json({
         success: true,
         data: response.data
       });
   
-    }catch(error) {
-      console.error(error.response.data);
+    } catch(error) {
+      console.error(error.response?.data || error.message);
   
       res.status(error.response?.status || 500).json({
         success: false,
-        message: error.response?.data || "Something went wrong"
+        message: error.response?.data?.message || "Something went wrong"
       });
     }
   };
+  
 
 // module.exports.logout = async(req, res)=>{
 //     try {
