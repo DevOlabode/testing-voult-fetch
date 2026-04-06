@@ -1,4 +1,6 @@
 const axios = require('axios');
+const TokenManager = require('./utils/tokenManager');
+const tokenManager = new TokenManager();
 
 module.exports.register = async (req, res) => {
     try {
@@ -65,6 +67,7 @@ module.exports.register = async (req, res) => {
 
 module.exports.logout = async(req, res)=>{
     try {
+      const accessToken = await tokenManager.getValidAccessToken();
       const response = await axios.post(
         'https://voult.dev/api/auth/logout',
         {},
@@ -73,7 +76,7 @@ module.exports.logout = async(req, res)=>{
             'Content-Type': 'application/json',
             'x-client-id': `${process.env.CLIENT_ID}`,
             'x-client-secret': `${process.env.CLIENT_SECRET}`,
-            'X-Client-Token': `Bearer ${process.env.ACCESS_TOKEN}`
+            'X-Client-Token': `Bearer ${accessToken}`
           }
         }
       );
