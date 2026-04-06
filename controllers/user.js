@@ -4,13 +4,13 @@ const tokenManager = new TokenManager();
 
 module.exports.getProfile = async(req, res)=>{
     try {
-      const currentToken = tokenManager.getCurrentToken();
+      const accessToken = tokenManager.getValidAccessToken();
 
       const response = await axios.get(
         `${process.env.API_URL}/user/me`,
         {
           headers: {
-            'X-Client-Token': `Bearer ${currentToken}`
+            'X-Client-Token': `Bearer ${accessToken}`
           }
         }
       );
@@ -34,7 +34,7 @@ module.exports.getProfile = async(req, res)=>{
 
 module.exports.editProfile = async(req, res) =>{
     try {
-      const currentToken = tokenManager.getCurrentToken();
+      const accessToken = tokenManager.getValidAccessToken();
       const response = await axios.patch(
         `${process.env.API_URL}/user/me`,
         req.body,
@@ -43,7 +43,7 @@ module.exports.editProfile = async(req, res) =>{
             'Content-Type': 'application/json',
             'x-client-id': `${process.env.CLIENT_ID}`,
             'x-client-secret': `${process.env.CLIENT_SECRET}`,
-            'X-Client-Token': `Bearer ${currentToken}`
+            'X-Client-Token': `Bearer ${accessToken}`
           }
         }
       );

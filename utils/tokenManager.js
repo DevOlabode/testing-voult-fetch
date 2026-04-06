@@ -38,7 +38,7 @@ class TokenManager {
       }
   
       // Refresh token
-      const response = await fetch('/api/session/refresh', {
+      const response = await fetch(`${process.env.API_URL}/sessions/refresh`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ refreshToken: this.refreshToken })
