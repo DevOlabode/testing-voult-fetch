@@ -61,7 +61,7 @@ class TokenManager {
       
       return accessToken;
     }
-  
+    
     updateEnvFile(key, value) {
       const fs = require('fs');
       const envPath = '.env';
