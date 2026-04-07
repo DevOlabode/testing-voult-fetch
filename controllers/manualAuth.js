@@ -46,13 +46,20 @@ module.exports.register = async (req, res) => {
           }
         }
       );
+
+      console.log('=== LOGIN RESPONSE DEBUG ===');
+      console.log('Has accessToken:', !!response.data.accessToken);
+      console.log('Has refreshToken:', !!response.data.refreshToken);
+      console.log('accessToken:', response.data.accessToken ? response.data.accessToken.substring(0, 50) + '...' : 'NULL');
+      console.log('refreshToken:', response.data.refreshToken ? response.data.refreshToken.substring(0, 50) + '...' : 'NULL');
+      console.log('==========================');
   
       // ✅ CRITICAL: Store tokens in TokenManager after login
       tokenManager.setTokens(
         response.data.accessToken,
         response.data.refreshToken
       );
-  
+
       res.json({
         success: true,
         data: response.data
