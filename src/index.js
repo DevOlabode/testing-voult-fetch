@@ -6,6 +6,11 @@ const axios = require('axios');
 const app = express();
 const port = process.env.PORT || 3000;
 
+const path = require('path');
+const ejsMate = require('ejs-mate');
+
+
+
 const manualAuthRoutes = require('../routes/manualAuth');
 const userRoutes  = require('../routes/user');
 const googleOauthRoutes = require('../routes/googleOauth');
