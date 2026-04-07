@@ -61,10 +61,12 @@ module.exports.register = async (req, res) => {
         response.data.refreshToken
       );
 
-      res.json({
-        success: true,
-        data: response.data
-      });
+      // res.json({
+      //   success: true,
+      //   data: response.data
+      // });
+
+      res.redirect('/');
   
     } catch(error) {
       console.error(error.response?.data || error.message);
