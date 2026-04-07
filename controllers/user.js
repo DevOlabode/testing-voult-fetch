@@ -3,6 +3,7 @@ const tokenManager = require('../utils/tokenManager');
 
 module.exports.getProfile = async(req, res)=>{
     try {
+      const tokenManager = req.app.get('tokenManager');
       const accessToken = tokenManager.getValidAccessToken();
 
       const response = await axios.get(
@@ -33,6 +34,7 @@ module.exports.getProfile = async(req, res)=>{
 
 module.exports.editProfile = async(req, res) =>{
     try {
+      const tokenManager = req.app.get('tokenManager');
       const accessToken = tokenManager.getValidAccessToken();
       const response = await axios.patch(
         `${process.env.API_URL}/user/me`,

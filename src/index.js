@@ -10,6 +10,11 @@ const manualAuthRoutes = require('../routes/manualAuth');
 const userRoutes  = require('../routes/user');
 const googleOauthRoutes = require('../routes/googleOauth');
 
+const tokenManager = require('../utils/tokenManager');
+
+// Make it available to all routes
+app.set('tokenManager', tokenManager);
+
 app.use(express.json());
 
 app.use('/', manualAuthRoutes);

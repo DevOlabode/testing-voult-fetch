@@ -1,5 +1,4 @@
 const axios = require('axios');
-const tokenManager = require('../utils/tokenManager');
 
 module.exports.register = async (req, res) => {
     try {
@@ -34,6 +33,7 @@ module.exports.register = async (req, res) => {
 
   module.exports.login = async(req, res) =>{
     try {
+      const tokenManager = req.app.get('tokenManager');
       const response = await axios.post(
         `${process.env.API_URL}/auth/login`,
         req.body,
@@ -76,6 +76,7 @@ module.exports.register = async (req, res) => {
 
 module.exports.logout = async(req, res)=>{
   try {
+    const tokenManager = req.app.get('tokenManager');
     const currentToken = tokenManager.getCurrentToken();
     
     if (!currentToken) {
