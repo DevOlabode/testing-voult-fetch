@@ -9,7 +9,10 @@ const port = process.env.PORT || 3000;
 const path = require('path');
 const ejsMate = require('ejs-mate');
 
+const session = require('express-session');
+const flash = require('connect-flash');
 
+const sessionConfig = require('../config/session');
 
 const manualAuthRoutes = require('../routes/manualAuth');
 const userRoutes  = require('../routes/user');
@@ -21,6 +24,9 @@ const tokenManager = require('../utils/tokenManager');
 app.set('tokenManager', tokenManager);
 
 app.use(express.json());
+
+app.use(session(sessionConfig));
+app.use(flash());
 
 app.use('/', manualAuthRoutes);
 app.use('/', userRoutes);
