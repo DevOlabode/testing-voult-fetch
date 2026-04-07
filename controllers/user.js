@@ -4,7 +4,9 @@ const tokenManager = require('../utils/tokenManager');
 module.exports.getProfile = async(req, res)=>{
     try {
       const tokenManager = req.app.get('tokenManager');
-      const accessToken = tokenManager.getValidAccessToken();
+      const accessToken = await tokenManager.getValidAccessToken();
+
+      console.log("Access token : ", accessToken);
 
       const response = await axios.get(
         `${process.env.API_URL}/user/me`,
@@ -35,7 +37,7 @@ module.exports.getProfile = async(req, res)=>{
 module.exports.editProfile = async(req, res) =>{
     try {
       const tokenManager = req.app.get('tokenManager');
-      const accessToken = tokenManager.getValidAccessToken();
+      const accessToken = await tokenManager.getValidAccessToken();
       const response = await axios.patch(
         `${process.env.API_URL}/user/me`,
         req.body,

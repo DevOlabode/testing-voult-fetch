@@ -94,7 +94,7 @@ module.exports.logout = async(req, res)=>{
           'Content-Type': 'application/json',
           'x-client-id': `${process.env.CLIENT_ID}`,
           'x-client-secret': `${process.env.CLIENT_SECRET}`,
-          'x-client-token': `Bearer ${currentToken}`
+          'X-Client-Token': `Bearer ${currentToken}`
         }
       }
     );
