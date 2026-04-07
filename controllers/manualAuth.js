@@ -1,5 +1,9 @@
 const axios = require('axios');
 
+module.exports.registerForm = (req, res)=>{
+  res.render('register');
+}
+
 module.exports.register = async (req, res) => {
     try {
       const response = await axios.post(
