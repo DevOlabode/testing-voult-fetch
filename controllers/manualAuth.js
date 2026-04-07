@@ -35,6 +35,10 @@ module.exports.register = async (req, res) => {
     }
   };
 
+  module.exports.loginForm = (req, res)=>{
+    res.render('login')
+  }
+
   module.exports.login = async(req, res) =>{
     try {
       const tokenManager = req.app.get('tokenManager');

@@ -40,7 +40,7 @@ app.use('/', userRoutes);
 app.use('/', googleOauthRoutes);
 
 app.get('/', (req, res) => {
-  res.render('login');
+  res.render('home');
 });
 
 app.use((req, res, next) => {
