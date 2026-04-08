@@ -12,6 +12,8 @@ const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const flash = require('connect-flash');
 
+const ExpressError = require('../utils/expressError');
+
 const sessionConfig = require('../config/session');
 
 const manualAuthRoutes = require('../routes/manualAuth');
@@ -37,16 +39,20 @@ app.engine('ejs', ejsMate);
 
 app.use(express.static(path.join(__dirname, '../public')));
 
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  res.locals.info = req.flash('info');
+  res.locals.currentUser = req.user;
+  next();
+});
+
 app.use('/', manualAuthRoutes);
 app.use('/', userRoutes);
 app.use('/', googleOauthRoutes);
 
 app.get('/', (req, res) => {
   res.render('home');
-});
-
-app.use((req, res, next) => {
-  next(new ExpressError('Page Not Found', 404));
 });
 
 app.listen(port, () => {
