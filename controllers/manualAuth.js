@@ -19,11 +19,14 @@ module.exports.register = async (req, res) => {
       );
   
       console.log(response.data);
+
+      req.flash('success', response.data.message);
+      res.redirect('/')
   
-      res.json({
-        success: true,
-        data: response.data
-      });
+      // res.json({
+      //   success: true,
+      //   data: response.data
+      // });
   
     } catch (error) {
       console.error(error.response.data);
@@ -66,6 +69,7 @@ module.exports.register = async (req, res) => {
       //   data: response.data
       // });
 
+      req.flash('success', response.data.message);
       res.redirect('/');
   
     } catch(error) {
