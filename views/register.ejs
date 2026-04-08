@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Into This Server</title>
-</head>
-<body>
-    <h4>Registration</h4>
-</body>
-</html>
+<% layout('layout/boilerplate.ejs') %>
+
+<form action="/register" method="post">
+    <label for="fullName">Full Name</label>
+    <input type="text" name="fullName" id="fullName" required placeholder="Enter your full name">
+
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required placeholder="Enter your email">
+
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required placeholder="Enter your password">
+
+    <button type="submit">Register</button>
+</form>
