@@ -53,7 +53,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  console.log(req.user);
+  if(req.isAuthenticated()){
+    console.log('Is It?')
+  }else{
+    console.log('Is is not')
+  }
 
   res.render('home');
 });
