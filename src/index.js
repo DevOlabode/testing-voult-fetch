@@ -48,18 +48,8 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  console.log(req.currentUser); 
+  console.log('Current user:', req.user); 
   res.render('home', { user: req.user });
-});
-
-app.get('/', (req, res) => {
-  if(req.isAuthenticated()){
-    console.log('Is It?')
-  }else{
-    console.log('Is is not')
-  }
-
-  res.render('home');
 });
 
 app.use('/', manualAuthRoutes);
