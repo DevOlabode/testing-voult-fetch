@@ -53,6 +53,11 @@ app.get('/', (req, res) => {
   res.render('home', { user: req.user });
 });
 
+// Dashboard route
+app.get('/dashboard', (req, res) => {
+  res.render('dashboard');
+});
+
 app.use('/', manualAuthRoutes);
 app.use('/', userRoutes);
 app.use('/', googleOauthRoutes);

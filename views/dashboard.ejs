@@ -1,0 +1,123 @@
+<% layout('layout/boilerplate.ejs') %>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="card-title">Dashboard</h3>
+            <button id="logout-btn" class="btn btn-outline-danger">Logout</button>
+          </div>
+
+          <div class="user-info">
+            <div class="row">
+              <div class="col-md-4 text-center">
+                <img id="user-avatar" src="" alt="User Avatar" class="rounded-circle mb-3" width="100" height="100">
+              </div>
+              <div class="col-md-8">
+                <h4 id="user-name"></h4>
+                <p class="text-muted" id="user-email"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <h5>Authentication Status</h5>
+            <div id="auth-status" class="alert alert-info">
+              Checking authentication...
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <h5>Token Information</h5>
+            <div class="card">
+              <div class="card-body">
+                <p><strong>Access Token:</strong> <code id="access-token-preview"></code></p>
+                <p><strong>Has Refresh Token:</strong> <span id="refresh-token-status"></span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <h5>Test API Request</h5>
+            <button id="test-api-btn" class="btn btn-primary">Make Test Request</button>
+            <div id="api-response" class="mt-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Check if user is authenticated
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    if (!accessToken) {
+      window.location.href = '/login';
+      return;
+    }
+
+    // Display user info if available
+    const userInfo = window.googleOAuthFrontend?.getUserInfo();
+    
+    if (userInfo) {
+      document.getElementById('user-name').textContent = userInfo.name || 'N/A';
+      document.getElementById('user-email').textContent = userInfo.email || 'N/A';
+      document.getElementById('user-avatar').src = userInfo.picture || 'https://via.placeholder.com/100';
+    }
+
+    // Show auth status
+    document.getElementById('auth-status').textContent = '✓ You are authenticated';
+    document.getElementById('auth-status').className = 'alert alert-success';
+
+    // Show token info
+    const tokenPreview = accessToken.length > 20 
+      ? accessToken.substring(0, 20) + '...' 
+      : accessToken;
+    document.getElementById('access-token-preview').textContent = tokenPreview;
+    document.getElementById('refresh-token-status').textContent = refreshToken ? 'Yes' : 'No';
+
+    // Logout button
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      if (window.googleOAuthFrontend) {
+        window.googleOAuthFrontend.logout();
+      } else {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        window.location.href = '/login';
+      }
+    });
+
+    // Test API request button
+    document.getElementById('test-api-btn').addEventListener('click', async () => {
+      const responseDiv = document.getElementById('api-response');
+      responseDiv.innerHTML = '<div class="alert alert-info">Making request...</div>';
+
+      try {
+        if (window.googleOAuthFrontend) {
+          const response = await window.googleOAuthFrontend.makeAuthenticatedRequest('https://voult.dev/api/user/profile');
+          const data = await response.json();
+          
+          responseDiv.innerHTML = `
+            <div class="alert alert-success">
+              <strong>Success!</strong>
+              <pre>${JSON.stringify(data, null, 2)}</pre>
+            </div>
+          `;
+        } else {
+          responseDiv.innerHTML = '<div class="alert alert-danger">Google OAuth frontend not initialized</div>';
+        }
+      } catch (error) {
+        responseDiv.innerHTML = `
+          <div class="alert alert-danger">
+            <strong>Error:</strong> ${error.message}
+          </div>
+        `;
+      }
+    });
+  });
+</script>
