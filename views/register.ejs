@@ -1,14 +1,21 @@
 <% layout('layout/boilerplate.ejs') %>
 
-<form action="/register" method="post">
-    <label for="fullName">Full Name</label>
-    <input type="text" name="fullName" id="fullName" required placeholder="Enter your full name">
+<h3>Register Into This Server</h3>
+<form action="/register" method="post" class="">
+    <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" class="form-control" name="fullName" id="fullName" required placeholder="Enter your full name">
+    </div>
 
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required placeholder="Enter your email">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" class="form-control" id="email" required placeholder="Enter your email">
+    </div>
 
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required placeholder="Enter your password">
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control" id="password" required placeholder="Enter your password">
+    </div>
 
     <button type="submit">Register</button>
 </form>
