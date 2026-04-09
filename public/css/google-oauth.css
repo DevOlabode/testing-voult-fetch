@@ -1,0 +1,48 @@
+/* Google OAuth Button Styles */
+.google-oauth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40px;
+}
+
+/* Divider Styles */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 24px 0;
+    color: #6c757d;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.divider span {
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Google Button Container */
+#google-login-btn,
+#google-register-btn {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .card {
+        margin: 16px;
+    }
+    
+    .divider {
+        margin: 16px 0;
+    }
+}

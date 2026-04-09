@@ -1,21 +1,43 @@
 <% layout('layout/boilerplate.ejs') %>
   
-<h3>Logging In</h3>
-<form action="/login" method="post">
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" class="form-control" id="email" required placeholder="Enter your email">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">Login</h3>
+          
+          <!-- Google OAuth Button -->
+          <div class="text-center mb-4">
+            <div id="google-login-btn" class="google-oauth-container"></div>
+          </div>
+
+          <div class="divider">
+            <span>or</span>
+          </div>
+
+          <!-- Manual Login Form -->
+          <form action="/login" method="post">
+            <div class="form-group mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" id="email" required placeholder="Enter your email">
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" name="password" class="form-control" id="password" required placeholder="Enter your password">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+          </form>
+
+          <div class="text-center mt-3">
+            <p>Don't have an account? <a href="/register">Register here</a></p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
 
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" name="password" class="form-control" id="password" required placeholder="Enter your password">
-    </div>
-
-    <button type="submit">Login</button>
-</form>
-
-<a href="/auth/google" class="google-btn">
-  <img src="" alt="Google" />
-  <span>Continue with Google</span>
-</a>
+<script src="/js/google-oauth.js"></script>

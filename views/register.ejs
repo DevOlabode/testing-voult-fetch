@@ -1,21 +1,48 @@
 <% layout('layout/boilerplate.ejs') %>
 
-<h3>Register Into This Server</h3>
-<form action="/register" method="post" class="">
-    <div class="form-group">
-        <label for="fullName">Full Name</label>
-        <input type="text" class="form-control" name="fullName" id="fullName" required placeholder="Enter your full name">
-    </div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">Register</h3>
+          
+          <!-- Google OAuth Button -->
+          <div class="text-center mb-4">
+            <div id="google-register-btn" class="google-oauth-container"></div>
+          </div>
 
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" class="form-control" id="email" required placeholder="Enter your email">
-    </div>
+          <div class="divider">
+            <span>or</span>
+          </div>
 
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" name="password" class="form-control" id="password" required placeholder="Enter your password">
-    </div>
+          <!-- Manual Registration Form -->
+          <form action="/register" method="post">
+            <div class="form-group mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" name="fullName" id="fullName" required placeholder="Enter your full name">
+            </div>
 
-    <button type="submit">Register</button>
-</form>
+            <div class="form-group mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" id="email" required placeholder="Enter your email">
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" name="password" class="form-control" id="password" required placeholder="Enter your password">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+          </form>
+
+          <div class="text-center mt-3">
+            <p>Already have an account? <a href="/login">Login here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/google-oauth.js"></script>
