@@ -6,6 +6,41 @@
     min-height: 40px;
 }
 
+/* Google OAuth Button Styles for Code Flow */
+.btn-google-oauth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #ffffff;
+    border: 1px solid #dadce0;
+    color: #3c4043;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-google-oauth:hover {
+    background-color: #f8f9fa;
+    border-color: #c6c6c6;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.btn-google-oauth:active {
+    background-color: #e8eaed;
+    transform: translateY(0);
+}
+
+.btn-google-oauth:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
 /* Divider Styles */
 .divider {
     display: flex;
